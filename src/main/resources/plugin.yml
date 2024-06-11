@@ -4,7 +4,8 @@ main: blokplugins.kitroom.Kitroom
 api-version: '1.20'
 commands:
   kit:
-    description: "opens kitroom"
+    description: "opens kit menu"
     aliases:
       - kits
-      - kitroom
+  kitroom:
+    description: "opens up the kitroom"
