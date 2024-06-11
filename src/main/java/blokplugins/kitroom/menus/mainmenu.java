@@ -1,5 +1,6 @@
 package blokplugins.kitroom.menus;
 
+import blokplugins.kitroom.extra.KitRoomMainHolder;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -14,7 +15,7 @@ import java.util.List;
 public class mainmenu {
     public Inventory inv;
     public mainmenu(Player player) {
-        inv = Bukkit.createInventory(null, 45, ChatColor.LIGHT_PURPLE + player.getDisplayName() + "'s kits");
+        inv = Bukkit.createInventory(new KitRoomMainHolder(), 45, ChatColor.LIGHT_PURPLE + player.getDisplayName() + "'s kits");
         initializeItems();
         player.openInventory(inv);
     }
