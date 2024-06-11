@@ -2,3 +2,9 @@ name: kitroom
 version: '${project.version}'
 main: blokplugins.kitroom.Kitroom
 api-version: '1.20'
+commands:
+  kit:
+    description: "opens kitroom"
+    aliases:
+      - kits
+      - kitroom
