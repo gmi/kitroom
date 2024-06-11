@@ -1,36 +1,22 @@
-package blokplugins.kitroom.commands;
+package blokplugins.kitroom.menus;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class test implements CommandExecutor {
+public class mainmenu {
     public Inventory inv;
-    @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
-            inv = Bukkit.createInventory(null, 45, ChatColor.LIGHT_PURPLE + player.getDisplayName() + "'s kits");
-            initializeItems();
-            player.openInventory(inv);
-            return true;
-
-        } else {
-            sender.sendMessage("can only be ran by player");
-            return false;
-        }
+    public mainmenu(Player player) {
+        inv = Bukkit.createInventory(null, 45, ChatColor.LIGHT_PURPLE + player.getDisplayName() + "'s kits");
+        initializeItems();
+        player.openInventory(inv);
     }
     public void initializeItems() {
         ItemStack purpleGlass = new ItemStack(Material.PURPLE_STAINED_GLASS_PANE);
@@ -40,10 +26,9 @@ public class test implements CommandExecutor {
         for (int i = 0; i < 9; i++) {
             inv.setItem(i, purpleGlass);
         }
-        for (int i = 35; i < 45; i++) {
+        for (int i = 27; i < 45; i++) {
             inv.setItem(i, purpleGlass);
         }
-        inv.setItem(27, purpleGlass);
 
         ItemStack chest = new ItemStack(Material.CHEST);
         ItemMeta metachest = chest.getItemMeta();
@@ -70,27 +55,28 @@ public class test implements CommandExecutor {
 
         ItemStack kitroom = new ItemStack(Material.NETHER_STAR);
         ItemMeta kitroommeta = kitroom.getItemMeta();
-        kitroommeta.setDisplayName(ChatColor.GREEN + "KIT ROOM");
+        kitroommeta.setDisplayName(ChatColor.GREEN + "" + ChatColor.BOLD + "KIT ROOM");
         kitroom.setItemMeta(kitroommeta);
         inv.setItem(30, kitroom);
 
-        ItemStack info = new ItemStack(Material.NETHER_STAR);
+        ItemStack info = new ItemStack(Material.OAK_SIGN);
         ItemMeta infometa = info.getItemMeta();
-        infometa.setDisplayName(ChatColor.GREEN + "INFO");
+        infometa.setDisplayName(ChatColor.GREEN + "" + ChatColor.BOLD + "INFO");
         List<String> infolore = new ArrayList<>();
         infolore.add(ChatColor.GRAY + "- Click a kit slot to load your kit");
         infolore.add(ChatColor.GRAY + "- Right click a kit slot to edit your kit");
         infometa.setLore(infolore);
         info.setItemMeta(infometa);
-        inv.setItem(30, info);
+        inv.setItem(31, info);
 
         ItemStack clear = new ItemStack(Material.REDSTONE_BLOCK);
         ItemMeta clearmeta = clear.getItemMeta();
-        clearmeta.setDisplayName(ChatColor.RED + "CLEAR INVENTORY");
+        clearmeta.setDisplayName(ChatColor.RED + "" + ChatColor.BOLD + "CLEAR INVENTORY");
         List<String> clearlore = new ArrayList<>();
         clearlore.add(ChatColor.GRAY + "- Shift Click");
         clearmeta.setLore(clearlore);
         clear.setItemMeta(clearmeta);
-        inv.setItem(31, clear);
+        inv.setItem(32, clear);
     }
+
 }
