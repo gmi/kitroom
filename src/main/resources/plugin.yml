@@ -9,3 +9,5 @@ commands:
       - kits
   kitroom:
     description: "opens up the kitroom"
+  x:
+    description: "x"

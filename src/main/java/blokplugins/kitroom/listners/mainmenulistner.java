@@ -18,7 +18,6 @@ public class mainmenulistner implements Listener {
                 player.getInventory().clear();
             }
             if(e.getCurrentItem().getType() == Material.NETHER_STAR) {
-                player.closeInventory();
                 new kitroomitems(player);
             }
             e.setCancelled(true);
