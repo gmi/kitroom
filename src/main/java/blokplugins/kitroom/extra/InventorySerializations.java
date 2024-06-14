@@ -1,35 +1,36 @@
 package blokplugins.kitroom.extra;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import org.bukkit.Material;
+import org.bukkit.block.BlockState;
+import org.bukkit.block.ShulkerBox;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.*;
+import org.bukkit.inventory.meta.BlockStateMeta;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.block.ShulkerBox;
 import org.bukkit.potion.PotionData;
-import org.bukkit.potion.PotionType;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import blokplugins.kitroom.database.PointsDatabase;
+
 public class InventorySerializations {
 
     private final JavaPlugin plugin;
-    private final Gson gson;
+    private final PointsDatabase database;
 
-    public InventorySerializations(JavaPlugin plugin) {
+    public InventorySerializations(JavaPlugin plugin, PointsDatabase database) {
         this.plugin = plugin;
-        this.gson = new GsonBuilder().setPrettyPrinting().create();
+        this.database = database;
     }
 
-    public void serializeInventory(Inventory inventory, String fileName) {
+    public void serializeInventory(Inventory inventory, String playerUUID, String kitName) {
         List<Map<String, Object>> inventoryData = new ArrayList<>();
 
         for (int slot = 0; slot < Math.min(inventory.getSize(), 41); slot++) {
@@ -64,10 +65,9 @@ public class InventorySerializations {
             }
         }
 
-        String json = gson.toJson(inventoryData);
-        try (FileWriter writer = new FileWriter(plugin.getDataFolder() + "/" + fileName)) {
-            writer.write(json);
-        } catch (IOException e) {
+        try {
+            database.uploadKit(playerUUID, kitName, inventoryData);
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
