@@ -14,7 +14,7 @@ public class kitroomitemslistner implements Listener {
         if(e.getInventory().getHolder() instanceof KitRoomItemsMainHolder){
             if(e.getRawSlot() >= 45 && e.getRawSlot() <= 53) {
                 Player player = (Player) e.getWhoClicked();
-                if(e.getCurrentItem().getType() == Material.OAK_DOOR) {
+                if(e.getRawSlot() == 53) {
                     new mainmenu(player);
                 }
                 e.setCancelled(true);

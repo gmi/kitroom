@@ -4,6 +4,8 @@ import blokplugins.kitroom.commands.CommandKit;
 import blokplugins.kitroom.commands.CommandKitroom;
 import blokplugins.kitroom.database.PointsDatabase;
 import blokplugins.kitroom.extra.FilesStartup;
+import blokplugins.kitroom.listners.echestlistner;
+import blokplugins.kitroom.listners.editkitlistnet;
 import blokplugins.kitroom.listners.kitroomitemslistner;
 import blokplugins.kitroom.listners.mainmenulistner;
 import blokplugins.kitroom.testing.InventorySaver;
@@ -26,7 +28,9 @@ public final class Kitroom extends JavaPlugin {
         this.getCommand("kit").setExecutor(new CommandKit());
         this.getCommand("kitroom").setExecutor(new CommandKitroom());
         getServer().getPluginManager().registerEvents(new mainmenulistner(), this);
+        getServer().getPluginManager().registerEvents(new editkitlistnet(), this);
         getServer().getPluginManager().registerEvents(new kitroomitemslistner(), this);
+        getServer().getPluginManager().registerEvents(new echestlistner(), this);
 
         try {
             if (!getDataFolder().exists()) {
