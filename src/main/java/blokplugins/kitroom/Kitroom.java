@@ -2,13 +2,13 @@ package blokplugins.kitroom;
 
 import blokplugins.kitroom.commands.CommandKit;
 import blokplugins.kitroom.commands.CommandKitroom;
+import blokplugins.kitroom.commands.InventorySerializations;
 import blokplugins.kitroom.database.PointsDatabase;
 import blokplugins.kitroom.extra.FilesStartup;
 import blokplugins.kitroom.listners.echestlistner;
 import blokplugins.kitroom.listners.editkitlistnet;
 import blokplugins.kitroom.listners.kitroomitemslistner;
 import blokplugins.kitroom.listners.mainmenulistner;
-import blokplugins.kitroom.testing.InventorySaver;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -24,7 +24,7 @@ public final class Kitroom extends JavaPlugin {
         List<String> filePaths = Arrays.asList("vanillapvp.json", "diamoncrystal.json", "potions.json", "armory.json", "axe.json");
         FilesStartup filesstartup = new FilesStartup(getLogger(), getDataFolder());
         filesstartup.createFiles(filePaths);
-        this.getCommand("x").setExecutor(new InventorySaver());
+        this.getCommand("x").setExecutor(new InventorySerializations(this));
         this.getCommand("kit").setExecutor(new CommandKit());
         this.getCommand("kitroom").setExecutor(new CommandKitroom());
         getServer().getPluginManager().registerEvents(new mainmenulistner(), this);
