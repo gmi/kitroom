@@ -1,5 +1,6 @@
 package blokplugins.kitroom.listners;
 
+import blokplugins.kitroom.extra.InventorySerializations;
 import blokplugins.kitroom.extra.KitEditHolder;
 import blokplugins.kitroom.menus.editkit;
 import blokplugins.kitroom.menus.mainmenu;
@@ -9,6 +10,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 public class editkitlistnet implements Listener {
+    private final InventorySerializations inventorySerializer;
+
+    public editkitlistnet(InventorySerializations inventorySerializer) {
+        this.inventorySerializer = inventorySerializer;
+    }
     @EventHandler
     public void onInventoryClick(InventoryClickEvent e) {
         if (e.getInventory().getHolder() instanceof KitEditHolder) {
@@ -20,6 +26,8 @@ public class editkitlistnet implements Listener {
                      String title = e.getView().getTitle();
                      String lastLetter = title.substring(title.length() - 1);
                      new editkit(player,Integer.valueOf(lastLetter), player.getInventory());
+                 } else if (e.getRawSlot() == 50) {
+                     inventorySerializer.serializeInventory(e.getClickedInventory(), "inventory_slot_10.json");
                  }
                 e.setCancelled(true);
             }

@@ -1,14 +1,9 @@
-package blokplugins.kitroom.commands;
+package blokplugins.kitroom.extra;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.*;
@@ -24,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class InventorySerializations implements CommandExecutor {
+public class InventorySerializations {
 
     private final JavaPlugin plugin;
     private final Gson gson;
@@ -34,19 +29,10 @@ public class InventorySerializations implements CommandExecutor {
         this.gson = new GsonBuilder().setPrettyPrinting().create();
     }
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!(sender instanceof Player)) {
-            sender.sendMessage("This command can only be run by a player.");
-            return true;
-        }
-
-        Player player = (Player) sender;
-        Inventory inventory = player.getInventory();
-
+    public void serializeInventory(Inventory inventory, String fileName) {
         List<Map<String, Object>> inventoryData = new ArrayList<>();
 
-        for (int slot = 0; slot < inventory.getSize(); slot++) {
+        for (int slot = 0; slot < Math.min(inventory.getSize(), 41); slot++) {
             ItemStack item = inventory.getItem(slot);
             if (item != null) {
                 Map<String, Object> itemData = new HashMap<>();
@@ -79,16 +65,11 @@ public class InventorySerializations implements CommandExecutor {
         }
 
         String json = gson.toJson(inventoryData);
-        try (FileWriter writer = new FileWriter(plugin.getDataFolder() + "/inventory.json")) {
+        try (FileWriter writer = new FileWriter(plugin.getDataFolder() + "/" + fileName)) {
             writer.write(json);
         } catch (IOException e) {
             e.printStackTrace();
-            player.sendMessage("An error occurred while saving the inventory.");
-            return true;
         }
-
-        player.sendMessage("Inventory saved to inventory.json");
-        return true;
     }
 
     private Map<String, Integer> getEnchantments(ItemMeta meta) {
