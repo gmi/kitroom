@@ -1,4 +1,4 @@
-name: kitroom
+name: KitMaster
 version: '${project.version}'
 main: blokplugins.kitroom.Kitroom
 api-version: '1.20'
