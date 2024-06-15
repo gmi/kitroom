@@ -37,6 +37,7 @@ public class echestlistner implements Listener {
                     inventorySerializer.serializeInventory(e.getClickedInventory(), e.getWhoClicked().getUniqueId().toString(), "EC " + lastLetter, 27);
                 } else if (e.getRawSlot() == 34 && e.isShiftClick()) {
                     pointsDatabase.deleteKit(uuid, "EC " + lastLetter);
+                    new editechest(player, Integer.valueOf(lastLetter), player.getEnderChest(), null);
                 }
                 e.setCancelled(true);
             }

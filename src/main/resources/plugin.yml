@@ -9,6 +9,7 @@ commands:
     description: "opens kit menu"
     aliases:
       - kits
+      - k
   kitroom:
     description: "opens up the kitroom"
   k1:
