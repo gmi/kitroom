@@ -47,3 +47,6 @@ commands:
     description: "Loads Ender Chest 8"
   ec9:
     description: "Loads Ender Chest 9"
+  kitadmin:
+    description: "kitroom admin options"
+    permission: kitroom.admin

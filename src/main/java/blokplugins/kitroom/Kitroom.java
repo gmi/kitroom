@@ -5,6 +5,7 @@ import blokplugins.kitroom.commands.CommandKit;
 import blokplugins.kitroom.commands.CommandKitLoader;
 import blokplugins.kitroom.commands.CommandKitroom;
 import blokplugins.kitroom.database.PointsDatabase;
+import blokplugins.kitroom.extra.FilesStartup;
 import blokplugins.kitroom.extra.InventorySerializations;
 import blokplugins.kitroom.listners.echestlistner;
 import blokplugins.kitroom.listners.editkitlistnet;
@@ -16,6 +17,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
 
 public final class Kitroom extends JavaPlugin {
     private PointsDatabase pointsDatabase;
@@ -34,6 +37,13 @@ public final class Kitroom extends JavaPlugin {
             getLogger().severe("Failed to connect to database: " + ex.getMessage());
             Bukkit.getPluginManager().disablePlugin(this);
             return;
+        }
+        List<String> filePaths = Arrays.asList("vanillapvp", "diamoncrystal", "potions", "armory", "axe");
+        FilesStartup filesstartup = new FilesStartup(getLogger(), getDataFolder(), pointsDatabase);
+        try {
+            filesstartup.createFiles(filePaths);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         this.getCommand("kit").setExecutor(new CommandKit());
         this.getCommand("kitroom").setExecutor(new CommandKitroom());
