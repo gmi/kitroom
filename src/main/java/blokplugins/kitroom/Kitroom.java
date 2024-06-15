@@ -1,9 +1,6 @@
 package blokplugins.kitroom;
 
-import blokplugins.kitroom.commands.CommandEchestLoader;
-import blokplugins.kitroom.commands.CommandKit;
-import blokplugins.kitroom.commands.CommandKitLoader;
-import blokplugins.kitroom.commands.CommandKitroom;
+import blokplugins.kitroom.commands.*;
 import blokplugins.kitroom.database.PointsDatabase;
 import blokplugins.kitroom.extra.FilesStartup;
 import blokplugins.kitroom.extra.InventorySerializations;
@@ -45,6 +42,7 @@ public final class Kitroom extends JavaPlugin {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        this.getCommand("kitadmin").setExecutor(new CommandKitAdmin());
         this.getCommand("kit").setExecutor(new CommandKit());
         this.getCommand("kitroom").setExecutor(new CommandKitroom());
         getServer().getPluginManager().registerEvents(new mainmenulistner(inventorySerializer), this);

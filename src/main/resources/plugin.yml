@@ -50,3 +50,7 @@ commands:
   kitadmin:
     description: "kitroom admin options"
     permission: kitroom.admin
+permissions:
+  kitroom.admin:
+    description: allows /kitadmin
+    default: op
