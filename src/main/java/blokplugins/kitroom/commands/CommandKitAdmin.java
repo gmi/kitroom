@@ -28,7 +28,7 @@ public class CommandKitAdmin implements CommandExecutor {
         if (!player.hasPermission("kitroom.admin")) {
             return true;
         } else {
-            Inventory deserializedInventory = inventorySerializer.deserializeInventory("kitroom", "");
+            Inventory deserializedInventory = inventorySerializer.deserializeInventory("kitroom", "vanillapvp");
             new kitroomadmin(player, "vanillapvp", deserializedInventory);
         }
         return false;

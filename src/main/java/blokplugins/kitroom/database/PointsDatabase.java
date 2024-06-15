@@ -91,5 +91,18 @@ public class PointsDatabase {
             statement.executeUpdate();
         }
     }
+    public boolean kitExists(String uuid, String kitName) throws SQLException {
+        try (PreparedStatement checkStatement = connection.prepareStatement("SELECT COUNT(*) AS count FROM kits WHERE uuid = ? AND kit = ?")) {
+            checkStatement.setString(1, uuid);
+            checkStatement.setString(2, kitName);
+
+            ResultSet resultSet = checkStatement.executeQuery();
+            if (resultSet.next()) {
+                int count = resultSet.getInt("count");
+                return count > 0;
+            }
+        }
+        return false;
+    }
 
 }

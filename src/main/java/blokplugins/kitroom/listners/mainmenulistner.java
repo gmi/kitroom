@@ -1,9 +1,11 @@
 package blokplugins.kitroom.listners;
 
+import blokplugins.kitroom.database.PointsDatabase;
 import blokplugins.kitroom.extra.InventorySerializations;
 import blokplugins.kitroom.extra.KitRoomMainHolder;
 import blokplugins.kitroom.menus.editechest;
 import blokplugins.kitroom.menus.editkit;
+import blokplugins.kitroom.menus.kitroomadmin;
 import blokplugins.kitroom.menus.kitroomitems;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -16,9 +18,11 @@ import org.bukkit.inventory.ItemStack;
 
 public class mainmenulistner implements Listener {
     private final InventorySerializations inventorySerializations;
+    private final PointsDatabase pointsDatabase;
 
-    public mainmenulistner(InventorySerializations inventorySerializations) {
+    public mainmenulistner(InventorySerializations inventorySerializations, PointsDatabase pointsDatabase) {
         this.inventorySerializations = inventorySerializations;
+        this.pointsDatabase = pointsDatabase;
     }
 
     @EventHandler
@@ -28,7 +32,8 @@ public class mainmenulistner implements Listener {
             if(e.isShiftClick() && e.getCurrentItem().getType() == Material.REDSTONE_BLOCK) {
                 player.getInventory().clear();
             } else if(e.getCurrentItem().getType() == Material.NETHER_STAR) {
-                new kitroomitems(player);
+                Inventory deserializedInventory = inventorySerializations.deserializeInventory("kitroom", "vanillapvp");
+                new kitroomitems(player, deserializedInventory, "vanillapvp");
             } else if (e.getRawSlot() >= 9 && e.getRawSlot() <= 17){
                 if (e.isRightClick()){
                     handleKitClickKit(player, e.getRawSlot(), e.isRightClick());
@@ -43,6 +48,9 @@ public class mainmenulistner implements Listener {
                     player.closeInventory();
                     handleKitClickEchest(player, e.getRawSlot(), e.isRightClick());
                 }
+            } else if (e.getRawSlot() == 40 && player.hasPermission("kitroom.admin")) {
+                Inventory deserializedInventory = inventorySerializations.deserializeInventory("kitroom", "vanillapvp");
+                new kitroomadmin(player, "vanillapvp", deserializedInventory);
             }
             e.setCancelled(true);
         }

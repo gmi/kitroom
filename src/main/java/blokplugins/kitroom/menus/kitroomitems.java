@@ -11,8 +11,16 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 public class kitroomitems {
     public Inventory inv;
-    public kitroomitems(Player player) {
-        inv = Bukkit.createInventory(new KitRoomItemsMainHolder(), 54, ChatColor.LIGHT_PURPLE + player.getDisplayName() + "'s kits");
+    public kitroomitems(Player player, Inventory prekit, String title) {
+        inv = Bukkit.createInventory(new KitRoomItemsMainHolder(), 54, title);
+        if (prekit != null) {
+            ItemStack[] contents = prekit.getContents();
+            for (int i = 0; i < contents.length; i++) {
+                if (contents[i] != null && contents[i].getType() != Material.AIR) {
+                    inv.setItem(i, contents[i]);
+                }
+            }
+        }
         initializeItems();
         player.openInventory(inv);
     }

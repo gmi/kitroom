@@ -17,6 +17,13 @@ public class mainmenu {
     public mainmenu(Player player) {
         inv = Bukkit.createInventory(new KitRoomMainHolder(), 45, ChatColor.LIGHT_PURPLE + player.getDisplayName() + "'s kits");
         initializeItems();
+        if(player.hasPermission("kitroom.admin")) {
+            ItemStack admin = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE);
+            ItemMeta adminmeta = admin.getItemMeta();
+            adminmeta.setDisplayName(ChatColor.RED + "" + ChatColor.BOLD + "Admin Tools");
+            admin.setItemMeta(adminmeta);
+            inv.setItem(40, admin);
+        }
         player.openInventory(inv);
     }
     public void initializeItems() {

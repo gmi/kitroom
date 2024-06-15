@@ -14,7 +14,7 @@ public class CommandKitroom implements CommandExecutor {
             return true;
         }
         Player player = (Player) sender;
-        new kitroomitems(player);
+        new kitroomitems(player, null, "vanillapvp");
         return false;
     }
 }

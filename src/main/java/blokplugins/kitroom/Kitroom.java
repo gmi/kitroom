@@ -2,12 +2,10 @@ package blokplugins.kitroom;
 
 import blokplugins.kitroom.commands.*;
 import blokplugins.kitroom.database.PointsDatabase;
-import blokplugins.kitroom.extra.FilesStartup;
+import blokplugins.kitroom.extra.DBstartup;
 import blokplugins.kitroom.extra.InventorySerializations;
 import blokplugins.kitroom.listners.*;
 import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.SQLException;
@@ -33,9 +31,9 @@ public final class Kitroom extends JavaPlugin {
             return;
         }
         List<String> filePaths = Arrays.asList("vanillapvp", "diamoncrystal", "potions", "armory", "axe");
-        FilesStartup filesstartup = new FilesStartup(getLogger(), getDataFolder(), pointsDatabase);
+        DBstartup dBstartup = new DBstartup(getLogger(), getDataFolder(), pointsDatabase);
         try {
-            filesstartup.createFiles(filePaths);
+            dBstartup.defaultDB(filePaths);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -43,9 +41,9 @@ public final class Kitroom extends JavaPlugin {
         this.getCommand("kit").setExecutor(new CommandKit());
         this.getCommand("kitroom").setExecutor(new CommandKitroom());
         getServer().getPluginManager().registerEvents(new kitadminlistner(inventorySerializer, pointsDatabase), this);
-        getServer().getPluginManager().registerEvents(new mainmenulistner(inventorySerializer), this);
+        getServer().getPluginManager().registerEvents(new mainmenulistner(inventorySerializer, pointsDatabase), this);
         getServer().getPluginManager().registerEvents(new editkitlistnet(inventorySerializer, pointsDatabase), this);
-        getServer().getPluginManager().registerEvents(new kitroomitemslistner(), this);
+        getServer().getPluginManager().registerEvents(new kitroomitemslistner(inventorySerializer, pointsDatabase), this);
         getServer().getPluginManager().registerEvents(new echestlistner(inventorySerializer, pointsDatabase), this);
         for (int i = 1; i <= 9; i++) {
             this.getCommand("k" + i).setExecutor(new CommandKitLoader(inventorySerializer, pointsDatabase));

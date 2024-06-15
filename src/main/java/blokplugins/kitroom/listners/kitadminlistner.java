@@ -38,18 +38,16 @@ public class kitadminlistner implements Listener {
                     handleKitClickKit(player, "armory");
                 } else if (e.getRawSlot() == 51) {
                     handleKitClickKit(player, "axe");
-                } else if (e.getRawSlot() == 53) {
-                    handleKitClickKit(player, "armory");
                 } else if (e.getRawSlot() == 45) {
                     inventorySerializer.serializeInventory(e.getClickedInventory(), "kitroom", e.getView().getTitle(), 45);
+                } else if (e.getRawSlot() == 53) {
+                    new mainmenu(player);
                 }
                 e.setCancelled(true);
             }
         }
     }
     private void handleKitClickKit(Player player, String name) {
-        String playerUUID = player.getUniqueId().toString();
-
         Inventory deserializedInventory = inventorySerializer.deserializeInventory("kitroom", name);
 
         new kitroomadmin(player, name, deserializedInventory);
