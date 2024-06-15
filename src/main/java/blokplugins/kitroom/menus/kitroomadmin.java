@@ -15,9 +15,17 @@ import java.util.List;
 
 public class kitroomadmin {
     public Inventory inv;
-    public kitroomadmin(Player player, String tab) {
-        inv = Bukkit.createInventory(new KitAdminHolder(), 54, ChatColor.LIGHT_PURPLE + tab);
+    public kitroomadmin(Player player, String tab, Inventory prekit) {
+        inv = Bukkit.createInventory(new KitAdminHolder(), 54, tab);
         initializeItems();
+        if (prekit != null) {
+            ItemStack[] contents = prekit.getContents();
+            for (int i = 0; i < contents.length; i++) {
+                if (contents[i] != null && contents[i].getType() != Material.AIR) {
+                    inv.setItem(i, contents[i]);
+                }
+            }
+        }
         player.openInventory(inv);
     }
 

@@ -4,10 +4,7 @@ import blokplugins.kitroom.commands.*;
 import blokplugins.kitroom.database.PointsDatabase;
 import blokplugins.kitroom.extra.FilesStartup;
 import blokplugins.kitroom.extra.InventorySerializations;
-import blokplugins.kitroom.listners.echestlistner;
-import blokplugins.kitroom.listners.editkitlistnet;
-import blokplugins.kitroom.listners.kitroomitemslistner;
-import blokplugins.kitroom.listners.mainmenulistner;
+import blokplugins.kitroom.listners.*;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -42,9 +39,10 @@ public final class Kitroom extends JavaPlugin {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        this.getCommand("kitadmin").setExecutor(new CommandKitAdmin());
+        this.getCommand("kitadmin").setExecutor(new CommandKitAdmin(inventorySerializer, pointsDatabase));
         this.getCommand("kit").setExecutor(new CommandKit());
         this.getCommand("kitroom").setExecutor(new CommandKitroom());
+        getServer().getPluginManager().registerEvents(new kitadminlistner(inventorySerializer, pointsDatabase), this);
         getServer().getPluginManager().registerEvents(new mainmenulistner(inventorySerializer), this);
         getServer().getPluginManager().registerEvents(new editkitlistnet(inventorySerializer, pointsDatabase), this);
         getServer().getPluginManager().registerEvents(new kitroomitemslistner(), this);

@@ -34,7 +34,7 @@ public class echestlistner implements Listener {
                 } else if(e.getRawSlot() == 33) {
                     new editechest(player, Integer.valueOf(lastLetter), player.getEnderChest(), null);
                 } else if (e.getRawSlot() == 32) {
-                    inventorySerializer.serializeInventory(e.getClickedInventory(), e.getWhoClicked().getUniqueId().toString(), "EC " + lastLetter, false);
+                    inventorySerializer.serializeInventory(e.getClickedInventory(), e.getWhoClicked().getUniqueId().toString(), "EC " + lastLetter, 27);
                 } else if (e.getRawSlot() == 34 && e.isShiftClick()) {
                     pointsDatabase.deleteKit(uuid, "EC " + lastLetter);
                 }

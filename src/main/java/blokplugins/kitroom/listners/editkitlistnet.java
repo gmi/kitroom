@@ -32,7 +32,7 @@ public class editkitlistnet implements Listener {
                  } else if (e.getRawSlot() == 51) {
                      new editkit(player,Integer.valueOf(lastLetter), player.getInventory(), null);
                  } else if (e.getRawSlot() == 50) {
-                     inventorySerializer.serializeInventory(e.getClickedInventory(), e.getWhoClicked().getUniqueId().toString(), "Kit " + lastLetter, true);
+                     inventorySerializer.serializeInventory(e.getClickedInventory(), e.getWhoClicked().getUniqueId().toString(), "Kit " + lastLetter, 41);
                  } else if (e.getRawSlot() == 52) {
                      if (e.isShiftClick()) {
                          String uuid = player.getUniqueId().toString();
