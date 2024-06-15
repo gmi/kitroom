@@ -46,7 +46,7 @@ public class mainmenu {
         ItemStack echest = new ItemStack(Material.ENDER_CHEST);
         ItemMeta metaechest = echest.getItemMeta();
         for (int i = 18; i < 27; i++) {
-            metaechest.setDisplayName(ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "ENDERCHEST");
+            metaechest.setDisplayName(ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "ENDERCHEST" + Integer.toString(i-17));
             List<String> echestlore = new ArrayList<>();
             echestlore.add(ChatColor.GRAY + "- Left click to load ender chest");
             echestlore.add(ChatColor.GRAY + "- Right click to edit ender chest");

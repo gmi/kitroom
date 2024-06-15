@@ -37,10 +37,15 @@ public class InventorySerializations {
         this.gson = new Gson();
     }
 
-    public void serializeInventory(Inventory inventory, String playerUUID, String kitName) {
+    public void serializeInventory(Inventory inventory, String playerUUID, String kitName, Boolean iskit) {
         List<Map<String, Object>> inventoryData = new ArrayList<>();
-
-        for (int slot = 0; slot < Math.min(inventory.getSize(), 41); slot++) {
+        Integer MaxSlot = 27;
+        if (iskit == true) {
+            MaxSlot = 41;
+        } else {
+            MaxSlot = 27;
+        }
+        for (int slot = 0; slot < Math.min(inventory.getSize(), MaxSlot); slot++) {
             ItemStack item = inventory.getItem(slot);
             if (item != null) {
                 Map<String, Object> itemData = new HashMap<>();

@@ -9,5 +9,39 @@ commands:
       - kits
   kitroom:
     description: "opens up the kitroom"
-  x:
-    description: "x"
+  k1:
+    description: "Loads kit 1"
+  k2:
+    description: "Loads kit 2"
+  k3:
+    description: "Loads kit 3"
+  k4:
+    description: "Loads kit 4"
+  k5:
+    description: "Loads kit 5"
+  k6:
+    description: "Loads kit 6"
+  k7:
+    description: "Loads kit 7"
+  k8:
+    description: "Loads kit 8"
+  k9:
+    description: "Loads kit 9"
+  ec1:
+    description: "Loads Ender Chest 1"
+  ec2:
+    description: "Loads Ender Chest 2"
+  ec3:
+    description: "Loads Ender Chest 3"
+  ec4:
+    description: "Loads Ender Chest 4"
+  ec5:
+    description: "Loads Ender Chest 5"
+  ec6:
+    description: "Loads Ender Chest 6"
+  ec7:
+    description: "Loads Ender Chest 7"
+  ec8:
+    description: "Loads Ender Chest 8"
+  ec9:
+    description: "Loads Ender Chest 9"
