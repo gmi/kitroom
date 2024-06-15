@@ -1,4 +1,4 @@
-package blokplugins.kitroom.commands;
+package blokplugins.kitroom.extra;
 
 import blokplugins.kitroom.extra.InventorySerializations;
 import org.bukkit.entity.Player;
@@ -8,7 +8,7 @@ public class KitOpener {
 
     private final InventorySerializations inventorySerializations;
 
-    public KitManager(InventorySerializations inventorySerializations) {
+    public KitOpener(InventorySerializations inventorySerializations) {
         this.inventorySerializations = inventorySerializations;
     }
 

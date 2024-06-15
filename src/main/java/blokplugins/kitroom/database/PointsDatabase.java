@@ -82,7 +82,14 @@ public class PointsDatabase {
             }
         }
 
-        return null; // or handle not found case appropriately
+        return null;
+    }
+    public void deleteKit(String uuid, String kitName) throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement("DELETE FROM kits WHERE uuid = ? AND kit = ?")) {
+            statement.setString(1, uuid);
+            statement.setString(2, kitName);
+            statement.executeUpdate();
+        }
     }
 
 }

@@ -31,13 +31,12 @@ public final class Kitroom extends JavaPlugin {
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         }
-
         this.getCommand("kit").setExecutor(new CommandKit());
         this.getCommand("kitroom").setExecutor(new CommandKitroom());
-        getServer().getPluginManager().registerEvents(new mainmenulistner(), this);
-        getServer().getPluginManager().registerEvents(new editkitlistnet(inventorySerializer), this);
+        getServer().getPluginManager().registerEvents(new mainmenulistner(inventorySerializer), this);
+        getServer().getPluginManager().registerEvents(new editkitlistnet(inventorySerializer, pointsDatabase), this);
         getServer().getPluginManager().registerEvents(new kitroomitemslistner(), this);
-        getServer().getPluginManager().registerEvents(new echestlistner(), this);
+        getServer().getPluginManager().registerEvents(new echestlistner(inventorySerializer, pointsDatabase), this);
     }
 
     @Override

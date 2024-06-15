@@ -14,12 +14,20 @@ import java.util.List;
 
 public class editkit {
     public Inventory inv;
-    public editkit(Player player, int kit, Inventory playerinv) {
+    public editkit(Player player, int kit, Inventory playerinv, Inventory prekit) {
         inv = Bukkit.createInventory(new KitEditHolder(), 54, ChatColor.LIGHT_PURPLE + "Kit: " + String.valueOf(kit));
         initializeItems();
 
         if (playerinv != null) {
             ItemStack[] contents = playerinv.getContents();
+            for (int i = 0; i < contents.length; i++) {
+                if (contents[i] != null && contents[i].getType() != Material.AIR) {
+                    inv.setItem(i, contents[i]);
+                }
+            }
+        }
+        if (prekit != null) {
+            ItemStack[] contents = prekit.getContents();
             for (int i = 0; i < contents.length; i++) {
                 if (contents[i] != null && contents[i].getType() != Material.AIR) {
                     inv.setItem(i, contents[i]);

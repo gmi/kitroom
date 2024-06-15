@@ -14,12 +14,20 @@ import java.util.List;
 
 public class editechest {
     public Inventory inv;
-    public editechest(Player player, Integer echest, Inventory playerechest) {
+    public editechest(Player player, Integer echest, Inventory playerechest, Inventory prekit) {
         inv = Bukkit.createInventory(new KitEChestHolder(), 36, ChatColor.LIGHT_PURPLE + "Ender Chest: " + String.valueOf(echest));
         initializeItems();
         
         if (playerechest != null) {
             ItemStack[] contents = playerechest.getContents();
+            for (int i = 0; i < contents.length; i++) {
+                if (contents[i] != null && contents[i].getType() != Material.AIR) {
+                    inv.setItem(i, contents[i]);
+                }
+            }
+        }
+        if (prekit != null) {
+            ItemStack[] contents = prekit.getContents();
             for (int i = 0; i < contents.length; i++) {
                 if (contents[i] != null && contents[i].getType() != Material.AIR) {
                     inv.setItem(i, contents[i]);

@@ -48,7 +48,8 @@ public class mainmenu {
         for (int i = 18; i < 27; i++) {
             metaechest.setDisplayName(ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "ENDERCHEST");
             List<String> echestlore = new ArrayList<>();
-            echestlore.add(ChatColor.GRAY + "- Use /enderchest " + ChatColor.GREEN + "save" + ChatColor.GRAY + "/" + ChatColor.GOLD + "load");
+            echestlore.add(ChatColor.GRAY + "- Left click to load ender chest");
+            echestlore.add(ChatColor.GRAY + "- Right click to edit ender chest");
             metaechest.setLore(echestlore);
             echest.setItemMeta(metaechest);
             inv.setItem(i, echest);
