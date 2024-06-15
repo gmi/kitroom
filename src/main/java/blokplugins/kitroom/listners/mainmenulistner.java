@@ -5,12 +5,14 @@ import blokplugins.kitroom.extra.KitRoomMainHolder;
 import blokplugins.kitroom.menus.editechest;
 import blokplugins.kitroom.menus.editkit;
 import blokplugins.kitroom.menus.kitroomitems;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 public class mainmenulistner implements Listener {
     private final InventorySerializations inventorySerializations;
@@ -31,13 +33,15 @@ public class mainmenulistner implements Listener {
                 if (e.isRightClick()){
                     handleKitClickKit(player, e.getRawSlot(), e.isRightClick());
                 } else if (e.isLeftClick()) {
-                    player.sendMessage("not added yet");
+                    player.closeInventory();
+                    handleKitClickKit(player, e.getRawSlot(), e.isRightClick());
                 }
             } else if (e.getRawSlot() >= 18 && e.getRawSlot() <= 26) {
                 if (e.isRightClick()){
                     handleKitClickEchest(player, e.getRawSlot(), e.isRightClick());
                 } else if (e.isLeftClick()) {
-                    player.sendMessage("not added yet");
+                    player.closeInventory();
+                    handleKitClickEchest(player, e.getRawSlot(), e.isRightClick());
                 }
             }
             e.setCancelled(true);
@@ -52,7 +56,16 @@ public class mainmenulistner implements Listener {
         if (isRightClick) {
             new editkit(player, rawSlot - 8,null, deserializedInventory);
         } else {
-            player.sendMessage("Kit name: " + kitName + " for player UUID: " + playerUUID);
+            player.getInventory().clear();
+            if (deserializedInventory != null) {
+                ItemStack[] contents = deserializedInventory.getContents();
+                for (int i = 0; i < contents.length; i++) {
+                    if (contents[i] != null && contents[i].getType() != Material.AIR) {
+                        player.getInventory().setItem(i, contents[i]);
+                    }
+                }
+                player.sendMessage(ChatColor.BOLD + "" + ChatColor.LIGHT_PURPLE + "Loaded Kit");
+            }
         }
     }
     private void handleKitClickEchest(Player player, int rawSlot, boolean isRightClick) {
@@ -64,7 +77,16 @@ public class mainmenulistner implements Listener {
         if (isRightClick) {
             new editechest(player, rawSlot - 17,null, deserializedInventory);
         } else {
-            player.sendMessage("Kit name: " + kitName + " for player UUID: " + playerUUID);
+            player.getEnderChest().clear();
+            if (deserializedInventory != null) {
+                ItemStack[] contents = deserializedInventory.getContents();
+                for (int i = 0; i < contents.length; i++) {
+                    if (contents[i] != null && contents[i].getType() != Material.AIR) {
+                        player.getEnderChest().setItem(i, contents[i]);
+                    }
+                }
+            }
+            player.sendMessage(ChatColor.BOLD + "" + ChatColor.LIGHT_PURPLE + "Loaded Ender Chest");
         }
     }
 }
