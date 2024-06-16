@@ -14,7 +14,7 @@ public class CommandKit implements CommandExecutor {
             return true;
         }
         Player player = (Player) sender;
-        new mainmenu(player);
+        new mainmenu(player, null);
         return false;
     }
 }

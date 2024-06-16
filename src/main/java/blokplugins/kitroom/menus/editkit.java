@@ -1,6 +1,7 @@
 package blokplugins.kitroom.menus;
 
 import blokplugins.kitroom.extra.KitEditHolder;
+import blokplugins.kitroom.extra.KitEditOthersHolder;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -14,8 +15,12 @@ import java.util.List;
 
 public class editkit {
     public Inventory inv;
-    public editkit(Player player, int kit, Inventory playerinv, Inventory prekit) {
-        inv = Bukkit.createInventory(new KitEditHolder(), 54, ChatColor.LIGHT_PURPLE + "Kit: " + String.valueOf(kit));
+    public editkit(Player player, int kit, Inventory playerinv, Inventory prekit, Player target) {
+        if(target == null) {
+            inv = Bukkit.createInventory(new KitEditHolder(), 54, ChatColor.LIGHT_PURPLE + "Kit: " + String.valueOf(kit));
+        } else {
+            inv = Bukkit.createInventory(new KitEditOthersHolder(), 54, "1:" + target.getDisplayName());
+        }
         initializeItems();
 
         if (playerinv != null) {

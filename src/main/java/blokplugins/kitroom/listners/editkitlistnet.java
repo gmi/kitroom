@@ -3,8 +3,10 @@ package blokplugins.kitroom.listners;
 import blokplugins.kitroom.database.PointsDatabase;
 import blokplugins.kitroom.extra.InventorySerializations;
 import blokplugins.kitroom.extra.KitEditHolder;
+import blokplugins.kitroom.extra.KitEditOthersHolder;
 import blokplugins.kitroom.menus.editkit;
 import blokplugins.kitroom.menus.mainmenu;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -28,9 +30,9 @@ public class editkitlistnet implements Listener {
                 String lastLetter = title.substring(title.length() - 1);
                 Player player = (Player) e.getWhoClicked();
                  if(e.getRawSlot() == 53) {
-                    new mainmenu(player);
+                    new mainmenu(player, null);
                  } else if (e.getRawSlot() == 51) {
-                     new editkit(player,Integer.valueOf(lastLetter), player.getInventory(), null);
+                     new editkit(player,Integer.valueOf(lastLetter), player.getInventory(), null, null);
                  } else if (e.getRawSlot() == 50) {
                      inventorySerializer.serializeInventory(e.getClickedInventory(), e.getWhoClicked().getUniqueId().toString(), "Kit " + lastLetter, 41);
                  } else if (e.getRawSlot() == 52) {
@@ -38,10 +40,32 @@ public class editkitlistnet implements Listener {
                          String uuid = player.getUniqueId().toString();
                          String kitName = "Kit " + lastLetter;
                          pointsDatabase.deleteKit(uuid, kitName);
-                         new editkit(player, Integer.valueOf(lastLetter), null, null);
+                         new editkit(player, Integer.valueOf(lastLetter), null, null, null);
                      }
 
                  }
+                e.setCancelled(true);
+            }
+        } else if (e.getInventory().getHolder() instanceof KitEditOthersHolder) {
+            if(e.getRawSlot() <= 53 && e.getRawSlot() >= 41) {
+                String title = e.getView().getTitle();
+                String lastLetter = String.valueOf(title.charAt(0));
+                Player player = Bukkit.getPlayer(title.substring(2));
+                if(e.getRawSlot() == 53) {
+                    new mainmenu((Player) e.getWhoClicked(), player);
+                } else if (e.getRawSlot() == 51) {
+                    new editkit((Player) e.getWhoClicked(),Integer.valueOf(lastLetter), e.getWhoClicked().getInventory(), null, player);
+                } else if (e.getRawSlot() == 50) {
+                    inventorySerializer.serializeInventory(e.getClickedInventory(), String.valueOf(player.getUniqueId()), "Kit " + lastLetter, 41);
+                } else if (e.getRawSlot() == 52) {
+                    if (e.isShiftClick()) {
+                        String uuid = player.getUniqueId().toString();
+                        String kitName = "Kit " + lastLetter;
+                        pointsDatabase.deleteKit(uuid, kitName);
+                        new editkit(player, Integer.valueOf(lastLetter), null, null, null);
+                    }
+
+                }
                 e.setCancelled(true);
             }
         }

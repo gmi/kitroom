@@ -29,7 +29,7 @@ public class kitroomitemslistner implements Listener {
                 Player player = (Player) e.getWhoClicked();
                 String title = e.getView().getTitle();
                 if (e.getRawSlot() == 53) {
-                    new mainmenu(player);
+                    new mainmenu(player, null);
                 } else if (e.getRawSlot() == 47) {
                     handleKitClickKit(player, "vanillapvp");
                 } else if (e.getRawSlot() == 48) {

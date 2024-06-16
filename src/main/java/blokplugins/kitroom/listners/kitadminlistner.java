@@ -41,7 +41,7 @@ public class kitadminlistner implements Listener {
                 } else if (e.getRawSlot() == 45) {
                     inventorySerializer.serializeInventory(e.getClickedInventory(), "kitroom", e.getView().getTitle(), 45);
                 } else if (e.getRawSlot() == 53) {
-                    new mainmenu(player);
+                    new mainmenu(player, null);
                 }
                 e.setCancelled(true);
             }

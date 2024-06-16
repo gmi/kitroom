@@ -37,10 +37,12 @@ public final class Kitroom extends JavaPlugin {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        this.getCommand("kitview").setExecutor(new CommandKitView());
         this.getCommand("kitadmin").setExecutor(new CommandKitAdmin(inventorySerializer, pointsDatabase));
         this.getCommand("kit").setExecutor(new CommandKit());
-        this.getCommand("kitroom").setExecutor(new CommandKitroom());
+        this.getCommand("kitroom").setExecutor(new CommandKitroom(inventorySerializer, pointsDatabase));
         getServer().getPluginManager().registerEvents(new kitadminlistner(inventorySerializer, pointsDatabase), this);
+        getServer().getPluginManager().registerEvents(new kitmenuotherslistner(inventorySerializer, pointsDatabase), this);
         getServer().getPluginManager().registerEvents(new mainmenulistner(inventorySerializer, pointsDatabase), this);
         getServer().getPluginManager().registerEvents(new editkitlistnet(inventorySerializer, pointsDatabase), this);
         getServer().getPluginManager().registerEvents(new kitroomitemslistner(inventorySerializer, pointsDatabase), this);

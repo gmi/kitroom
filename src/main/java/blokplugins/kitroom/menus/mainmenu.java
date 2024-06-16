@@ -1,5 +1,6 @@
 package blokplugins.kitroom.menus;
 
+import blokplugins.kitroom.extra.KitMainMenuOthersHolder;
 import blokplugins.kitroom.extra.KitRoomMainHolder;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -9,13 +10,19 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class mainmenu {
     public Inventory inv;
-    public mainmenu(Player player) {
-        inv = Bukkit.createInventory(new KitRoomMainHolder(), 45, ChatColor.LIGHT_PURPLE + player.getDisplayName() + "'s kits");
+    public mainmenu(Player player, @Nullable Player target) {
+        if (target == null) {
+            inv = Bukkit.createInventory(new KitRoomMainHolder(), 45, ChatColor.LIGHT_PURPLE + player.getDisplayName() + "'s kits");
+        } else {
+            inv = Bukkit.createInventory(new KitMainMenuOthersHolder(), 45, target.getDisplayName());
+        }
+
         initializeItems();
         if(player.hasPermission("kitroom.admin")) {
             ItemStack admin = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE);

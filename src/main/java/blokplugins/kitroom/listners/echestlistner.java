@@ -30,7 +30,7 @@ public class echestlistner implements Listener {
                 Player player = (Player) e.getWhoClicked();
                 String uuid = player.getUniqueId().toString();
                 if (e.getRawSlot() == 35) {
-                    new mainmenu(player);
+                    new mainmenu(player, null);
                 } else if(e.getRawSlot() == 33) {
                     new editechest(player, Integer.valueOf(lastLetter), player.getEnderChest(), null);
                 } else if (e.getRawSlot() == 32) {

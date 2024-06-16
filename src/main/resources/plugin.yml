@@ -51,7 +51,13 @@ commands:
   kitadmin:
     description: "kitroom admin options"
     permission: kitroom.admin
+  kitview:
+    description: "views another persons kits"
+    permission: kitroom.viewothers
 permissions:
   kitroom.admin:
     description: allows /kitadmin
+    default: op
+  kitroom.viewothers:
+    description: allows
     default: op
