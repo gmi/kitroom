@@ -8,7 +8,4 @@ A simple spigot plugin where any player can create their own kits and save them 
 - To improve java skills
 
 ## Todo
-- [x]-Main home inventory
-- [_]-Database stuff
-- [_]-Custom kitrooms
-- [_]-Admin stuff
+- See other players kits
