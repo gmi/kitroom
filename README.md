@@ -9,3 +9,4 @@ A simple spigot plugin where any player can create their own kits and save them 
 
 ## Todo
 - See other players kits
+- Share kits
