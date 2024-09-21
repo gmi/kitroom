@@ -159,9 +159,15 @@ public class InventorySerializations {
                 if (itemData.containsKey("enchantments")) {
                     Map<String, Double> enchantments = (Map<String, Double>) itemData.get("enchantments");
                     for (Map.Entry<String, Double> enchantment : enchantments.entrySet()) {
-                        meta.addEnchant(Enchantment.getByKey(org.bukkit.NamespacedKey.minecraft(enchantment.getKey())), enchantment.getValue().intValue(), true);
+                        Enchantment ench = Enchantment.getByKey(org.bukkit.NamespacedKey.minecraft(enchantment.getKey()));
+                        if (ench != null) {  // Check if the enchantment is valid
+                            meta.addEnchant(ench, enchantment.getValue().intValue(), true);
+                        } else {
+                            plugin.getLogger().warning("Enchantment " + enchantment.getKey() + " is null or invalid.");
+                        }
                     }
                 }
+
 
                 if (meta instanceof EnchantmentStorageMeta && itemData.containsKey("storedEnchantments")) {
                     Map<String, Double> storedEnchantments = (Map<String, Double>) itemData.get("storedEnchantments");
