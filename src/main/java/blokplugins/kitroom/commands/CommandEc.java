@@ -25,6 +25,10 @@ public class CommandEc implements CommandExecutor {
         if (commandName.startsWith("ec")) {
             int kitNumber = Integer.parseInt(commandName.substring(2));
             String serializedInv =  Kitroom.getDbManager().getKit(p, "ec" + kitNumber);
+            if (serializedInv == null) {
+                p.sendMessage("ec doesnt exist");
+                return true;
+            }
             Inventory inv = serializeInventory.Deserialize(serializedInv);
             for (int i = 0; i < 27; i++) {
                 p.getEnderChest().setItem(i, inv.getItem(i));
