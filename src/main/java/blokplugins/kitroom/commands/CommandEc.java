@@ -9,7 +9,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
-public class CommandK implements CommandExecutor {
+
+public class CommandEc implements CommandExecutor {
     private static SerializeInventory serializeInventory = new SerializeInventory();
 
     @Override
@@ -21,17 +22,18 @@ public class CommandK implements CommandExecutor {
         Player p = (Player) sender;
         String commandName = command.getName().toLowerCase();
 
-        if (commandName.startsWith("k")) {
-            int kitNumber = Integer.parseInt(commandName.substring(1));
-            String serializedInv =  Kitroom.getDbManager().getKit(p, "k" + kitNumber);
+        if (commandName.startsWith("ec")) {
+            int kitNumber = Integer.parseInt(commandName.substring(2));
+            String serializedInv =  Kitroom.getDbManager().getKit(p, "ec" + kitNumber);
             Inventory inv = serializeInventory.Deserialize(serializedInv);
-            for (int i = 0; i < 41; i++) {
-                p.getInventory().setItem(i, inv.getItem(i));
+            for (int i = 0; i < 27; i++) {
+                p.getEnderChest().setItem(i, inv.getItem(i));
             }
-            p.sendMessage(ChatColor.BOLD + "" + ChatColor.LIGHT_PURPLE + "Loaded Kit");
+            p.sendMessage(ChatColor.BOLD + "" + ChatColor.LIGHT_PURPLE + "Loaded Ender Chest");
         } else {
-            p.sendMessage(ChatColor.BOLD + "" + ChatColor.LIGHT_PURPLE + "Kit Doesnt Exist");
+            p.sendMessage(ChatColor.BOLD + "" + ChatColor.LIGHT_PURPLE + "Ender Chest Doesnt Exist");
         }
+
         return true;
     }
 }

@@ -1,6 +1,7 @@
 package blokplugins.kitroom.commands;
 
 import blokplugins.kitroom.inventories.KitMenu;
+import blokplugins.kitroom.utils.SerializeInventory;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,6 +16,6 @@ public class CommandKit implements CommandExecutor {
         }
         Player p = (Player) sender;
         new KitMenu(p);
-        return false;
+        return true;
     }
 }
