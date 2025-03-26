@@ -1,7 +1,9 @@
 package blokplugins.kitroom.listeners;
 
+import blokplugins.kitroom.holders.EChestEditorHolder;
 import blokplugins.kitroom.holders.KitEditorHolder;
 import blokplugins.kitroom.holders.KitMenuHolder;
+import blokplugins.kitroom.listeners.inventories.EChestEditorListener;
 import blokplugins.kitroom.listeners.inventories.KitEditorListener;
 import blokplugins.kitroom.listeners.inventories.KitMenuListener;
 import org.bukkit.event.EventHandler;
@@ -18,6 +20,9 @@ public class InventoryClickEventListener implements Listener {
         }
         if (holder instanceof KitEditorHolder) {
             KitEditorListener.handleInventoryClick(e);
+        }
+        if (holder instanceof EChestEditorHolder) {
+            EChestEditorListener.handleInventoryClick(e);
         }
     }
 }

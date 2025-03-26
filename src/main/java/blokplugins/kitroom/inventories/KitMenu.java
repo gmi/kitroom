@@ -71,4 +71,5 @@ public class KitMenu {
             inv.setItem(40, admin);
         }
     }
+
 }
