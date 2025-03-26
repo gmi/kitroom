@@ -9,4 +9,5 @@ public interface DatabaseManager {
     String getKit(Player p, String kitType);
     void saveKit(Player p, String kitType, String kitData);
     void saveKitRoom(String name, String kit);
+    String getKitRoom(String name);
 }

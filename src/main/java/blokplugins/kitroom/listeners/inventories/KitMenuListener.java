@@ -2,6 +2,7 @@ package blokplugins.kitroom.listeners.inventories;
 
 import blokplugins.kitroom.inventories.EChestEditor;
 import blokplugins.kitroom.inventories.KitEditor;
+import blokplugins.kitroom.inventories.KitRoom;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
@@ -36,11 +37,14 @@ public class KitMenuListener {
                     break;
                 }
                 break;
-            case 30:
+            case 30: new KitRoom(p,"equipment", false); e.setCancelled(true); break;
             case 32:
-                if (e.isShiftClick()) { p.getInventory().clear(); break;}
+                if (e.isShiftClick()) { p.getInventory().clear();} break;
 
             case 40:
+                if(p.hasPermission("kitroom.admin")) {
+                    new KitRoom(p,"equipment", true); e.setCancelled(true); break;
+                }
         }
 
         e.setCancelled(true);

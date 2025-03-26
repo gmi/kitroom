@@ -4,6 +4,7 @@ import blokplugins.kitroom.commands.CommandEc;
 import blokplugins.kitroom.commands.CommandK;
 import blokplugins.kitroom.commands.CommandKit;
 import blokplugins.kitroom.database.DatabaseManager;
+import blokplugins.kitroom.database.MySQL;
 import blokplugins.kitroom.database.SQLite;
 import blokplugins.kitroom.listeners.InventoryClickEventListener;
 import blokplugins.kitroom.listeners.PlayerJoinEventListener;
@@ -19,6 +20,9 @@ public final class Kitroom extends JavaPlugin {
             getDataFolder().mkdirs();
         }
 
+        saveResource("config.yml", false);
+        saveDefaultConfig();
+
         getCommand("kit").setExecutor(new CommandKit());
         for (int i = 1; i <= 9; i++) {
             this.getCommand("k" + i).setExecutor(new CommandK());
@@ -30,7 +34,19 @@ public final class Kitroom extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new InventoryClickEventListener(), this);
         getServer().getPluginManager().registerEvents(new PlayerJoinEventListener(), this);
 
-        databaseManager = new SQLite(this);
+        String databaseType = getConfig().getString("databasetype");
+        switch (databaseType.toLowerCase()) {
+            case "sqlite":
+                databaseManager = new SQLite(this);
+                break;
+            case "mysql":
+                databaseManager = new MySQL(this);
+                break;
+            default:
+                getLogger().severe("[config] Invalid database type, plugin is disabled");
+                getServer().getPluginManager().disablePlugin(this);
+                return;
+        }
         getServer().getScheduler().runTaskAsynchronously(this, () -> {
             databaseManager.connect();
         });
