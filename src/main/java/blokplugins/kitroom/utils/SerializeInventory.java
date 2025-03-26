@@ -34,7 +34,7 @@ public class SerializeInventory {
             ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64.getDecoder().decode(input));
             BukkitObjectInputStream dataInput = new BukkitObjectInputStream(inputStream);
             int size = dataInput.readInt();
-            Inventory inventory = Bukkit.createInventory(null, size);
+            Inventory inventory = Bukkit.createInventory(null, 54);
             for (int i = 0; i < size; i++) {
                 inventory.setItem(i, (ItemStack) dataInput.readObject());
             }
@@ -45,4 +45,5 @@ public class SerializeInventory {
             return null;
         }
     }
+
 }

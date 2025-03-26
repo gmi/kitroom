@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KitMenu {
-    static CreateItem createItem = new CreateItem();
+    private static CreateItem createItem = new CreateItem();
     public Inventory inv;
     public KitMenu(Player p) {
         inv = Bukkit.createInventory(new KitMenuHolder(), 45, ChatColor.LIGHT_PURPLE + p.getDisplayName() + "'s kits");
