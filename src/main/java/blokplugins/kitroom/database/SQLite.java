@@ -15,7 +15,7 @@ public class SQLite implements DatabaseManager{
 
     @Override
     public void connect() {
-        String dbFileName = "database.db";
+        String dbFileName = "kitmaster.db";
         String dataFolder = plugin.getDataFolder().getPath();
         String dbPath = dataFolder + "/" + dbFileName;
         try {
@@ -31,8 +31,14 @@ public class SQLite implements DatabaseManager{
                     "ec7 TEXT DEFAULT NULL, ec8 TEXT DEFAULT NULL, ec9 TEXT DEFAULT NULL" +
                     ")";
 
+            String CreateTableSQLKitroom = "CREATE TABLE IF NOT EXISTS kitroom (" +
+                    "name TEXT PRIMARY KEY," +
+                    "kit TEXT" +
+                    ")";
+
             Statement query = connection.createStatement();
             query.execute(createTableSQLplayer);
+            query.execute(CreateTableSQLKitroom);
             query.close();
             plugin.getLogger().info("[SQLite] Connected to SQLite database");
         } catch (SQLException e) {
@@ -93,6 +99,11 @@ public class SQLite implements DatabaseManager{
         } catch (SQLException e) {
             plugin.getLogger().severe("[SQLite] Failed to save kit: " + e.getMessage());
         }
+    }
+
+    @Override
+    public void saveKitRoom(String name, String kit) {
+
     }
 
 }
