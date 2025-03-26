@@ -14,7 +14,6 @@ public class KitMenuListener {
                 if(e.isRightClick()) {
                     new KitEditor(p, e.getRawSlot() - 8, null);
                     e.setCancelled(true);
-                    p.closeInventory();
                     break;
                 }
                 if (e.isLeftClick()) {
@@ -28,7 +27,6 @@ public class KitMenuListener {
                 if(e.isRightClick()) {
                     new EChestEditor(p, e.getRawSlot() - 17, null);
                     e.setCancelled(true);
-                    p.closeInventory();
                     break;
                 }
                 if (e.isLeftClick()) {
