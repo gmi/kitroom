@@ -1,6 +1,7 @@
 package blokplugins.kitroom.commands;
 
-import blokplugins.kitroom.menus.mainmenu;
+import blokplugins.kitroom.inventories.KitMenu;
+import blokplugins.kitroom.utils.SerializeInventory;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -13,8 +14,8 @@ public class CommandKit implements CommandExecutor {
             sender.sendMessage("Only players can use this command");
             return true;
         }
-        Player player = (Player) sender;
-        new mainmenu(player, null);
-        return false;
+        Player p = (Player) sender;
+        new KitMenu(p);
+        return true;
     }
 }

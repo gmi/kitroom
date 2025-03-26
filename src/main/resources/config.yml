@@ -1,0 +1,8 @@
+databasetype: sqlite #ony use mysql if you know what you are doing ["sqlite", "mysql"]
+
+mysql:
+  host: localhost
+  port: 3306
+  database: kitmaster #must have the schema created before running
+  username: root
+  password: root
