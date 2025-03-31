@@ -3,6 +3,7 @@ package blokplugins.kitroom;
 import blokplugins.kitroom.commands.CommandEc;
 import blokplugins.kitroom.commands.CommandK;
 import blokplugins.kitroom.commands.CommandKit;
+import blokplugins.kitroom.commands.CommandKitadmin;
 import blokplugins.kitroom.database.DatabaseManager;
 import blokplugins.kitroom.database.MySQL;
 import blokplugins.kitroom.database.SQLite;
@@ -30,6 +31,7 @@ public final class Kitroom extends JavaPlugin {
         for (int i = 1; i <= 9; i++) {
             this.getCommand("ec" + i).setExecutor(new CommandEc());
         }
+        getCommand("kitadmin").setExecutor(new CommandKitadmin());
 
         getServer().getPluginManager().registerEvents(new InventoryClickEventListener(), this);
         getServer().getPluginManager().registerEvents(new PlayerJoinEventListener(), this);
