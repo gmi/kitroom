@@ -53,7 +53,7 @@ public class KitRoom {
         ItemStack potion = createItem.CreateItem(Material.END_CRYSTAL, ChatColor.BLUE + "Crystal PVP");
         inv.setItem(49, potion);
 
-        ItemStack equipment = createItem.CreateItem(Material.NETHERITE_CHESTPLATE, ChatColor.AQUA + "Equiptment");
+        ItemStack equipment = createItem.CreateItem(Material.NETHERITE_CHESTPLATE, ChatColor.AQUA + "Equipment");
         ItemMeta eqipmentmeta = equipment.getItemMeta(); eqipmentmeta.addEnchant(Enchantment.LUCK, 1, true); eqipmentmeta.addItemFlags(ItemFlag.HIDE_ENCHANTS); equipment.setItemMeta(eqipmentmeta);
         inv.setItem(48, equipment);
 
