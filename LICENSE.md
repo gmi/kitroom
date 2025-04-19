@@ -1,6 +1,6 @@
 # Non-Commercial Open-Source License (NCOSL)
 
-Copyright © blokongithub (https://github.com/blokongithub/kitroom)
+Copyright © gmi (https://github.com/gmi/kitroom)
 
 ## 1. Definitions
 - **"Software"** refers to the project, including source code, assets, and documentation, governed by this license.
@@ -16,8 +16,8 @@ You are permitted to:
 3. **Redistribute** the original or modified Software, provided:
    - The Software remains free of charge.
    - Proper attribution is given to the original author(s), including:
-     - **Name:** blokongithub
-     - **URL:** https://github.com/blokongithub/kitroom
+     - **Name:** gmi
+     - **URL:** https://github.com/gmi/kitroom
    - The Software includes a copy of this license.
 
 ---
